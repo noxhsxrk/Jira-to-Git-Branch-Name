@@ -2,6 +2,7 @@
   "name": "jira-to-git-branch-name",
   "displayName": "jira to git branch name",
   "description": "",
+  "publisher": "noxhsxrk",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.85.0"
