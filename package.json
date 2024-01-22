@@ -1,0 +1,68 @@
+{
+  "name": "jira-to-git-branch-name",
+  "displayName": "jira to git branch name",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "jira-to-git-branch-name.setupJiraCredentials",
+        "title": "Jira To Git Branch Name: Setup Jira Credentials"
+      },
+      {
+        "command": "jira-to-git-branch-name.fetchJiraIssue",
+        "title": "Jira To Git Branch Name: Get Branch Name From Jira URL"
+      }
+    ],
+    "configuration": {
+      "title": "Credentials",
+      "properties": {
+        "jiraToGitBranchName.jiraDomain": {
+          "type": "string",
+          "default": "",
+          "description": "Jira Domain"
+        },
+        "jiraToGitBranchName.userName": {
+          "type": "string",
+          "default": "",
+          "description": "User Name"
+        },
+        "jiraToGitBranchName.jiraApiToken": {
+          "type": "string",
+          "default": "",
+          "description": "Jira Api Token"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "axios": "^1.6.5"
+  }
+}
