@@ -4,7 +4,7 @@
   "description": "convert jira url to git branch name",
   "publisher": "noxhsxrk",
   "version": "0.0.2",
-  "icon": "src/assets/logo.jpeg",
+  "icon": "images/logo.jpeg",
   "license": "MIT",
   "engines": {
     "vscode": "^1.85.0"
