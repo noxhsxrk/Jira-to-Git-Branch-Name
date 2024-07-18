@@ -6,6 +6,8 @@ This Visual Studio Code extension helps you create a Git branch name based on a 
 
 - Set up Jira credentials to authenticate with your Jira instance.
 - Fetch Jira issue details and create a Git branch name.
+- [NEW] Set a default prefix for the branch name.
+- [NEW] Option to either copy the generated branch name to the clipboard or execute the git checkout -b command directly in the terminal.
 
 ## Prerequisites
 
@@ -35,7 +37,13 @@ Before using this extension, ensure you have the following:
 - Run the command: `Jira to Git Branch Name: Fetch Jira Issue`.
 - Enter the Jira issue key or URL when prompted.
 - Optionally, specify a prefix for the Git branch (e.g., feature, fix, hotfix).
-- The extension generates a Git branch name based on the Jira issue details and copies it to the clipboard.
+- Choose whether to copy the generated branch name to the clipboard or execute the git checkout -b {branchName} command directly in the terminal.
+
+### 3. Set Default Prefix
+
+- Run the command: Jira to Git Branch Name: Set Default Prefix.
+- Enter the default prefix you want to use for your Git branch names.
+- This prefix will be used automatically if no prefix is specified when generating a branch name.
 
 ## Configuration
 
@@ -45,6 +53,7 @@ You can also configure Jira credentials directly in your VS Code settings:
 {
   "jiraToGitBranchName.jiraDomain": "your_jira_domain",
   "jiraToGitBranchName.userName": "your_jira_user_name",
-  "jiraToGitBranchName.jiraApiToken": "your_jira_api_token"
+  "jiraToGitBranchName.jiraApiToken": "your_jira_api_token",
+  "jiraToGitBranchName.defaultPrefix": "your_default_prefix"
 }
 ```
