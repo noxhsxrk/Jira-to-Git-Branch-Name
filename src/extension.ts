@@ -4,6 +4,7 @@ import axios, { AxiosError, isAxiosError } from "axios";
 const jiraDomainKey = "jiraToGitBranchName.jiraDomain";
 const userNameKey = "jiraToGitBranchName.userName";
 const jiraApiTokenKey = "jiraToGitBranchName.jiraApiToken";
+const defaultPrefixKey = "jiraToGitBranchName.defaultPrefix";
 
 const getIssueTitle = (name: string) => {
   const symbolRegex = /[^\w\s]/gi;
@@ -22,6 +23,7 @@ const transformUrlToIssueId = (url: string) => {
   const issueId = url.match(issueIdRegex);
   return issueId?.length ? issueId[0] : "";
 };
+
 export function activate(context: vscode.ExtensionContext) {
   let setupCredentialsDisposable = vscode.commands.registerCommand(
     "jira-to-git-branch-name.setupJiraCredentials",
@@ -87,6 +89,32 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
+  let setDefaultPrefixDisposable = vscode.commands.registerCommand(
+    "jira-to-git-branch-name.setDefaultPrefix",
+    async () => {
+      const defaultPrefixInConfig = vscode.workspace
+        .getConfiguration()
+        .get<string>(defaultPrefixKey);
+
+      const defaultPrefix = await vscode.window.showInputBox({
+        prompt:
+          "Enter the default prefix for branch names (e.g., feature, fix)",
+        value: defaultPrefixInConfig,
+      });
+
+      vscode.workspace
+        .getConfiguration()
+        .update(
+          defaultPrefixKey,
+          defaultPrefix,
+          vscode.ConfigurationTarget.Global
+        );
+
+      vscode.window.showInformationMessage(
+        "Default prefix saved successfully."
+      );
+    }
+  );
   let fetchIssueDisposable = vscode.commands.registerCommand(
     "jira-to-git-branch-name.fetchJiraIssue",
     async () => {
@@ -102,7 +130,9 @@ export function activate(context: vscode.ExtensionContext) {
         .getConfiguration()
         .get<string>(jiraApiTokenKey);
 
-      const defaultPrefix = "feature";
+      const defaultPrefix = vscode.workspace
+        .getConfiguration()
+        .get<string>(defaultPrefixKey);
 
       if (!jiraDomain || !userName || !jiraApiToken) {
         vscode.window.showErrorMessage(
@@ -150,17 +180,48 @@ export function activate(context: vscode.ExtensionContext) {
           const name = getIssueTitle(cardName);
 
           const prefix = await vscode.window.showInputBox({
-            prompt: "Enter the Prefix (eg. fix, hotfix, etc.) default: feature",
-            value: defaultPrefix,
+            prompt:
+              "Enter the Prefix (eg. fix, hotfix, etc.) default: " +
+              defaultPrefix,
+            value: "",
           });
 
-          const branchName = `${prefix || defaultPrefix}/${key}-${name}`;
+          const branchName = prefix
+            ? `${prefix}/${key}-${name}`
+            : defaultPrefix
+            ? `${defaultPrefix}/${key}-${name}`
+            : `${key}-${name}`;
 
-          vscode.env.clipboard.writeText(branchName).then(() => {
+          const choice = await vscode.window.showQuickPick(
+            [
+              {
+                label: "Copy branch name to clipboard",
+                description: branchName,
+              },
+              {
+                label: "Checked out branch",
+                description: `git checkout -b ${branchName}`,
+              },
+            ],
+            {
+              placeHolder: "Choose an action",
+            }
+          );
+
+          if (choice?.label === "Copy branch name to clipboard") {
+            vscode.env.clipboard.writeText(branchName).then(() => {
+              vscode.window.showInformationMessage(
+                `Copied branch name to clipboard:\n${branchName}`
+              );
+            });
+          } else if (choice?.label === "Execute git checkout -b") {
+            const terminal = vscode.window.createTerminal("Git");
+            terminal.show();
+            terminal.sendText(`git checkout -b ${branchName}`);
             vscode.window.showInformationMessage(
-              `Copied branch name to clipboard:\n${branchName}`
+              `Checked out branch: git checkout -b ${branchName}`
             );
-          });
+          }
         } else {
           vscode.window.showWarningMessage(
             "Card name not found in issue data."
@@ -178,5 +239,6 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(setupCredentialsDisposable);
+  context.subscriptions.push(setDefaultPrefixDisposable);
   context.subscriptions.push(fetchIssueDisposable);
 }
