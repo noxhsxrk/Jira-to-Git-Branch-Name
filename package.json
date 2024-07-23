@@ -3,7 +3,7 @@
   "displayName": "Jira to Git Branch Name",
   "description": "convert jira url to git branch name",
   "publisher": "noxhsxrk",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "icon": "images/logo.jpeg",
   "license": "MIT",
   "engines": {
@@ -56,12 +56,15 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run compile",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+    "vscode:prepublish": "pnpm run esbuild-base --minify",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "pnpm run compile && pnpm run lint",
     "lint": "eslint src --ext ts",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "package": "pnpm vsce package --no-dependencies",
+    "publish": "pnpm vsce publish --no-dependencies"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.7",
@@ -71,8 +74,10 @@
     "@typescript-eslint/parser": "^7.16.1",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1",
+    "esbuild": "^0.23.0",
     "eslint": "^9.7.0",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.3",
+    "vsce": "^2.15.0"
   },
   "dependencies": {
     "axios": "^1.7.2"
