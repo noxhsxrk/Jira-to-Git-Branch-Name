@@ -3,7 +3,7 @@
   "displayName": "Jira to Git Branch Name",
   "description": "convert jira url to git branch name",
   "publisher": "noxhsxrk",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "icon": "images/logo.jpeg",
   "license": "MIT",
   "engines": {
@@ -56,8 +56,6 @@
     }
   },
   "scripts": {
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
-    "vscode:prepublish": "pnpm run esbuild-base --minify",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "pnpm run compile && pnpm run lint",
