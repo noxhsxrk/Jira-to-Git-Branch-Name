@@ -3,7 +3,7 @@
   "displayName": "Jira to Git Branch Name",
   "description": "convert jira url to git branch name",
   "publisher": "noxhsxrk",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "icon": "images/logo.jpeg",
   "license": "MIT",
   "engines": {
