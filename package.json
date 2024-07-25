@@ -3,7 +3,7 @@
   "displayName": "Jira to Git Branch Name",
   "description": "convert jira url to git branch name",
   "publisher": "noxhsxrk",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "icon": "images/logo.jpeg",
   "license": "MIT",
   "engines": {
@@ -12,11 +12,7 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:jira-to-git-branch-name.setupJiraCredentials",
-    "onCommand:jira-to-git-branch-name.fetchJiraIssue",
-    "onCommand:jira-to-git-branch-name.setDefaultPrefix"
-  ],
+  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -79,9 +75,7 @@
     "esbuild": "^0.23.0",
     "eslint": "^9.7.0",
     "typescript": "^5.5.4",
-    "vsce": "^2.15.0"
-  },
-  "dependencies": {
+    "vsce": "^2.15.0",
     "axios": "^1.7.2"
   },
   "repository": {

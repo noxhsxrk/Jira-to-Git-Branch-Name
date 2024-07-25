@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      axios:
-        specifier: ^1.7.2
-        version: 1.7.2
     devDependencies:
       '@types/mocha':
         specifier: ^10.0.7
@@ -33,6 +29,9 @@ importers:
       '@vscode/test-electron':
         specifier: ^2.4.1
         version: 2.4.1
+      axios:
+        specifier: ^1.7.2
+        version: 1.7.2
       esbuild:
         specifier: ^0.23.0
         version: 0.23.0
