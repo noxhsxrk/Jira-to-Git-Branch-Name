@@ -3,7 +3,7 @@
   "displayName": "Jira to Git Branch Name",
   "description": "convert jira url to git branch name",
   "publisher": "noxhsxrk",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "icon": "images/logo.jpeg",
   "license": "MIT",
   "engines": {
@@ -70,15 +70,15 @@
   },
   "devDependencies": {
     "@types/mocha": "^10.0.7",
-    "@types/node": "~20.14.11",
+    "@types/node": "~20.14.12",
     "@types/vscode": "^1.91.0",
-    "@typescript-eslint/eslint-plugin": "^7.16.1",
-    "@typescript-eslint/parser": "^7.16.1",
+    "@typescript-eslint/eslint-plugin": "^7.17.0",
+    "@typescript-eslint/parser": "^7.17.0",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1",
     "esbuild": "^0.23.0",
     "eslint": "^9.7.0",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.4",
     "vsce": "^2.15.0"
   },
   "dependencies": {

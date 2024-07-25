@@ -8,6 +8,5 @@
     "rootDir": "src",
     "strict": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src"]
 }
