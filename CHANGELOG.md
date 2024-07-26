@@ -4,6 +4,11 @@ All notable changes to the "jira-to-git-branch-name" extension will be documente
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.13]
+
+- Fix v0.0.3 dependencies
+- Fix execute git checkout command
+
 ## [0.0.3]
 
 - Add command to set default prefix to branch name

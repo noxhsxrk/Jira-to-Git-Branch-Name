@@ -214,7 +214,7 @@ export function activate(context: vscode.ExtensionContext) {
                 `Copied branch name to clipboard:\n${branchName}`
               );
             });
-          } else if (choice?.label === "Execute git checkout -b") {
+          } else if (choice?.label === "Checked out branch") {
             const terminal = vscode.window.createTerminal("Git");
             terminal.show();
             terminal.sendText(`git checkout -b ${branchName}`);
